@@ -1,84 +1,82 @@
 import React from 'react';
-import styled, { css } from 'styled-components/macro';
-import { menuData } from '../data/MenuData';
-import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { Button } from './Button';
+import styled from 'styled-components';
+import {info} from '../data/info';
+import Skills from '../components/Skills';
+import {skills} from '../data/skills';
 
 const Nav = styled.nav`
-    heigth: 60px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    z-index: 100;
-    position: fixed;
-    width: 100%;
-    background: #222831;
-`;
+    width: 350px;
+    height: 100vh;
+    background: rgb(45,49,57);
+    color: white;
+`
 
-const NavLink = css`
-    color: #fff;
-    padding: 0 1rem;
-    height: 100%;
-    cursor: pointer;
-    text-decoration: none;
+const HeaderNav = styled.div`
+    display: grid;
+    grid-gap: 15px;
+    justify-content: center;
+    padding: 40px 50px;
+    background: #383d47;
+    text-align: center;
+`
 
-    &:hover {
-        color: #f05454;
+const HeaderImg = styled.img`
+    width: 80px;
+    border-radius: 50%;
+    margin: 0 auto;
+`
+
+const Name = styled.h1`
+    font-size: 1em;
+`
+
+const Job = styled.p`
+    font-size: 0.9em;
+    color: #cccccc;
+`
+
+const InfoNav = styled.div`
+    width: 85%;
+    margin: 0 auto;
+    padding: 30px 0;
+`
+
+const ListeInfo = styled.ul`
+    list-style: none;
+    font-weight: 400;
+    line-height: 1.15em;
+    
+    > li {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85em;
+
+        .item { font-weight: 600; }
+        .item-value { color: #cccccc; }
     }
-`;
+`
 
-const Logo = styled(Link)`
-    ${NavLink}
-    font-style: italic;
-    font-size: 18px;
-`;
-
-const MenuBars = styled(FaBars)`
-    display: none;
-
-    @media screen and (max-width: 768px) {
-        display: block;
-        color: #fff;
-    }
-`;
-
-const NavMenu = styled.div`
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-`;
-
-const NavBtn = styled.div`
-    @media screen and (max-width: 768px) {
-        display: none;
-    }
-`;
-
-const NavMenuLinks = styled(Link)`
-    ${NavLink}
-`;
 
 const Navbar = () => {
-
-    return (
+    return(
         <Nav>
-            <Logo to="/">Matheo.fr</Logo>
-            <MenuBars />
-            <NavMenu>
-                {menuData.map((item, index) => (
-                    <NavMenuLinks to={item.link} key={index}>
-                        {item.title}
-                    </NavMenuLinks>
-                ))}
-            </NavMenu>
-            <NavBtn>
-                <Button to="/contact" primary='true'>Me contacter</Button>
-            </NavBtn>
+            <HeaderNav>
+                <HeaderImg src={info.img} />
+                <div>
+                    <Name>{info.name}</Name>
+                    <Job>{info.job}</Job>
+                </div>
+            </HeaderNav>
+            <InfoNav>
+                <ListeInfo>
+                    <li><span className="item">Ville :</span><span className="item-value">{info.city}</span></li>
+                    <li><span className="item">Age :</span><span className="item-value">{info.age}</span></li>
+                    <li><span className="item">Email :</span><span className="item-value">{info.email}</span></li>
+                </ListeInfo>
+            </InfoNav>
+            <Skills skills={skills} />
         </Nav>
     )
-
 }
 
 export default Navbar;
